@@ -5,7 +5,7 @@ class Account:
         self.customer_id = customer_id,
         self.type = type;
 
-    def to_dic(self):
+    def to_dict(self):
         return {
             "a_id": self.id,
             "balance": self.balance,

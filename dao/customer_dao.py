@@ -61,3 +61,4 @@ class CustomerDao:
 
 # customer_row = CustomerDao()
 # print(customer_row.get_all_customers_id)
+

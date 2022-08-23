@@ -1,6 +1,11 @@
 from dao.customer_dao import CustomerDao
 from exception.invalid_parameter import InvalidParameterError
 from exception.customer_not_found import CustomerNotFoundError
+from utility.contains_letter import containsLetter
+from utility.contains_num import containsNumber
+from utility.contains_space import containsSpace
+from utility.contains_spec_char import containsSpecChar
+
 
 class CustomerService:
     def __init__(self):
@@ -25,3 +30,8 @@ class CustomerService:
             raise CustomerNotFoundError(f"Customer with id {customer_id} was not found")
 
         return customer_obj.to_dict()
+
+        # 1) Check if username is at least 6 characters
+        # 2) Check if username contains spaces (not allowed)
+        # Invoke add_user in DAO, passing in a user_object
+        # Return the dictionary representation of the return value from that method
