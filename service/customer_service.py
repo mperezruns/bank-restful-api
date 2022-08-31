@@ -8,9 +8,9 @@ from utility.contains_spec_char import containsSpecChar
 
 
 class CustomerService:
+
     def __init__(self):
         self.customer_dao = CustomerDao()
-
         # Get a list of Customer objects from the DAO layer
         # convert the Customer objects into dictionaries
         # return a list of dictionaries that each represent the users
@@ -23,6 +23,7 @@ class CustomerService:
 
         return list_of_customer_dictionaries
 
+    # Get Customer object from the DAO layer and convert into a dictionary
     def get_customer_by_id(self, customer_id):
         customer_obj = self.customer_dao.get_customer_by_id(customer_id)
 
@@ -31,7 +32,12 @@ class CustomerService:
 
         return customer_obj.to_dict()
 
-        # 1) Check if username is at least 6 characters
-        # 2) Check if username contains spaces (not allowed)
-        # Invoke add_user in DAO, passing in a user_object
-        # Return the dictionary representation of the return value from that method
+    def add_customer(self, customer_object):
+        if " " in customer_object.username:
+            raise InvalidParameterError("Username cannot contain space")
+
+        if len(customer_object.username) < 6:
+            raise  InvalidParameterError("Username must be at least 6 characters")
+
+        added_customer_object = self.customer_dao.add_customer(customer_object)
+        return added_customer_object.to_dict()
